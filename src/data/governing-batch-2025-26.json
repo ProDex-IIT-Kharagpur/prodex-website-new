@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Richie Jaiswal",
+    "designation": "Governor",
+    "department": "Dept of Electronics and Electrical Communication Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/richie-jaiswal-86b266287",
+    "email": "richiejaiswal1811@gmail.com",
+    "image": "richie-jaiswal.jpeg"
+  },
+  {
+    "name": "Hardik Jagga",
+    "designation": "Governor",
+    "department": "Dept of Electronics and Electrical Communication Engineering",
+    "years": "2023-2027",
+    "linkedin": "https://www.linkedin.com/in/hardik-jagga-0b421528b",
+    "email": "harjag2005@gmail.com",
+    "image": "hardik-jagga.jpeg"
+  },
+  {
+    "name": "Vidhisha Bhakat",
+    "designation": "Governer",
+    "department": "Dept of Aerospace Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/vidhisha-bhakat-a5a189287/",
+    "email": "vidhishabhakat01@gmail.com",
+    "image": "vidhisha-bhakat.jpeg"
+  },
+  {
+    "name": "Shaunak Majumdar",
+    "designation": "Tech Head - Tech Coordinator",
+    "department": "Dept of Mechanical Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/shaunak-majumdar-865a27285",
+    "email": "nanoheist007@gmail.com",
+    "image": "shaunak-majumdar.jpeg"
+  },
+  {
+    "name": "Param",
+    "designation": "Tech Head - Tech Coordinator",
+    "department": "Dept of Mechanical Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/param-7a6b2a287/",
+    "email": "param.spl@gmail.com",
+    "image": "param.jpeg"
+  },
+  {
+    "name": "Utsav Agarwal",
+    "designation": "Tech Head - Project Lead",
+    "department": "Dept of Electronics and Electrical Communication Engineering",
+    "years": "2023-2027",
+    "linkedin": "https://www.linkedin.com/in/utsavag",
+    "email": "agarwalutsavisl@gmail.com",
+    "image": "utsav-agarwal.jpg"
+  },
+  {
+    "name": "Shubham Kumar Mandal",
+    "designation": "Tech Head - Project Lead",
+    "department": "Dept of Mechanical Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/shubham-kumar-mandal-679441279",
+    "email": "shubhamkumar28436@gmail.com",
+    "image": "shubham-kumar-mandal.jpeg"
+  },
+  {
+    "name": "Anushka Raheja",
+    "designation": "Web Head",
+    "department": "Dept of Computer Science and Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/anushka-raheja-b89957297",
+    "email": "anushkaraheja05@gmail.com",
+    "image": "anushka-raheja.jpeg"
+  },
+
+  {
+    "name": "Sushanth Machavolu",
+    "designation": "Senior Member",
+    "department": "Dept of Aerospace Engineering",
+    "years": "2023-2027",
+    "linkedin": "https://www.linkedin.com/in/sushanth-machavolu-5477992a3/",
+    "email": "sushanthmachavolu@gmail.com",
+    "image": "sushanth-machavolu.jpeg"
+  },
+  {
+    "name": "Dnyaneshwari Ghare",
+    "designation": "Senior Member",
+    "department": "Dept of Industrial and Systems Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/dnyaneshwari-ghare-9a274928b/",
+    "email": "dnyaneshwarighare.nssc@gmail.com",
+    "image": "dnyaneshwari-ghare.jpeg"
+  },
+  {
+    "name": "Virendra Bharti",
+    "designation": "Senior Member",
+    "department": "Dept of Agriculture and Food Engineering",
+    "years": "2023-2028",
+    "linkedin": "https://www.linkedin.com/in/virendrabharti/",
+    "email": "virendrabharti767@gmail.com",
+    "image": "virendra-bharti.jpeg"
+  }
+]

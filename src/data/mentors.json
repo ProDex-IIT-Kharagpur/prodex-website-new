@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Dr. Pranab K Dan",
+    "role": "Mentor",
+    "designation": "Associate Professor",
+    "department": "Rajendra Mishra School of Engineering Entrepreneurship",
+    "institution": "IIT Kharagpur",
+    "linkedin": "https://www.linkedin.com/in/pranab-dan-1a39999?trk=hp-identity-name",
+    "email": "pkdan@see.iitkgp.ernet.in",
+    "image": "pkdan.jpg"
+  },
+  {
+    "name": "Dr. Aditya Bandopadhyay",
+    "role": "Mentor",
+    "designation": "Assistant Professor",
+    "department": "Mechanical Engineering",
+    "institution": "IIT Kharagpur",
+    "linkedin": "https://www.linkedin.com/in/adityabandopadhyay/",
+    "email": "aditya@mech.iitkgp.ac.in",
+    "image": "aditya-bandopadhyay.jpg"
+  }
+]
