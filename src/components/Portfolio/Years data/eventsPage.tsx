@@ -138,7 +138,7 @@ export default function EventPage() {
         }
 
         .event-title {
-          padding: 3rem 2rem 2.5rem;
+          padding: 2rem 2rem 2rem;
           background: radial-gradient(
             circle at left,
             rgba(0, 229, 255, 0.12),
@@ -178,6 +178,7 @@ export default function EventPage() {
         .portfolio-info {
           padding: 2rem;
           border-radius: 16px;
+          max-height: 200px;
           background: linear-gradient(
             145deg,
             rgba(255, 255, 255, 0.04),
@@ -190,7 +191,46 @@ export default function EventPage() {
 
         .portfolio-description {
           grid-column: 1 / -1;
-          margin-top: 4rem;
+          margin-top: 1rem;
+          // padding-top: 3rem;
+          // border-top: 1px solid rgba(0, 229, 255, 0.12);
+        }
+        /* Subtitle */
+        .portfolio-description h2 {
+          font-size: 1.7rem;
+          font-weight: 600;
+          color: #bfefff;
+          margin-bottom: 1.4rem;
+          position: relative;
+          letter-spacing: 0.4px;
+        }
+
+        /* underline like TEAM divider */
+        .portfolio-description h2::after {
+          content: "";
+          display: block;
+          width: 64px;
+          height: 3px;
+          margin-top: 0.6rem;
+          background: linear-gradient(90deg, #00e5ff, #1da1f2);
+          border-radius: 999px;
+          box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+        }
+
+        /* Description text */
+        .portfolio-description p {
+          font-size: 1.02rem;
+          line-height: 1.75;
+          color: #cfefff;
+          max-width: 900px;
+          margin-bottom: 1.2rem;
+          opacity: 0.95;
+        }
+
+        /* Slight emphasis for first paragraph */
+        .portfolio-description p:first-of-type {
+          font-size: 1.05rem;
+          color: #eafaff;
         }
 
         @media (max-width: 900px) {
