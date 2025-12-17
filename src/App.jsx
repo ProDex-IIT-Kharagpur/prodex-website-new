@@ -3,7 +3,6 @@ import "./App.css";
 
 import Portfolio from "./components/Portfolio/Portfolio";
 import EventPage from "./components/Portfolio/Years data/eventsPage";
-
 import Members from "./components/Members";
 import Mentors from "./components/Mentors";
 
