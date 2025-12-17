@@ -1,7 +1,7 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm install --no-optional && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
-  ROLLUP_SKIP_NODEJS_NATIVE = "true"
+  NPM_CONFIG_OPTIONAL = "false"
