@@ -4,294 +4,136 @@ import logo from "../../../assets/prodex.png";
 
 export default function EventPage() {
   const { slug } = useParams();
-  const [searchParams] = useSearchParams(); // use search params link
+  const [searchParams] = useSearchParams();
 
-  const fromYear = searchParams.get("fromYear") || "All"; // restore year
-
+  const fromYear = searchParams.get("fromYear") || "All";
   const event = eventsData.find((e) => e.slug === slug);
-
   const fallbackImage = logo;
 
+  // Group events by year for dropdown
+  const eventsByYear = eventsData.reduce((acc, e) => {
+    acc[e.year] = acc[e.year] || [];
+    acc[e.year].push(e);
+    return acc;
+  }, {});
+
   if (!event) {
-    return <h2 style={{ padding: "4rem" }}>Event not found</h2>;
+    return <h2 className="p-16 text-cyan-100">Event not found</h2>;
   }
 
   return (
     <>
-      {/* ================== STYLES (unchanged) ================== */}
-      <style>{`
-        #main {
-          min-height: 100vh;
-          background: radial-gradient(
-            circle at top,
-            rgba(0, 180, 255, 0.08),
-            #050b10 60%
-          );
-          color: #eafaff;
-        }
-
-        .video-responsive {
-          width: 100%;
-          aspect-ratio: 16 / 9;
-          border-radius: 16px;
-          box-shadow:
-            0 15px 40px rgba(0, 0, 0, 0.7),
-            0 0 0 1px rgba(0, 229, 255, 0.25);
-        }
-
-        .event-header {
-          position: sticky;
-          top: 0;
-          z-index: 3000;
-          background: linear-gradient(
-            180deg,
-            rgba(5, 11, 16, 0.95),
-            rgba(5, 11, 16, 0.85)
-          );
-          backdrop-filter: blur(14px);
-          border-bottom: 1px solid rgba(0, 229, 255, 0.15);
-        }
-
-        .event-header-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0.9rem 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .event-logo img {
-          height: 36px;
-          filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6));
-        }
-
-        .event-breadcrumbs {
-          display: flex;
-          align-items: center;
-          gap: 0.45rem;
-          font-size: 0.85rem;
-          color: #9fb9c9;
-        }
-
-        .event-breadcrumbs a {
-          color: #00e5ff;
-          text-decoration: none;
-        }
-
-        .event-breadcrumbs a:hover {
-          color: #7ff6ff;
-        }
-
-        .breadcrumb-current {
-          color: #bfefff;
-        }
-
-        .breadcrumb-dropdown {
-          position: relative;
-        }
-
-        .breadcrumb-trigger {
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 0.2rem;
-        }
-
-        .breadcrumb-menu {
-          position: absolute;
-          top: 130%;
-          right: 0;
-          min-width: 260px;
-          background: linear-gradient(
-            145deg,
-            rgba(5, 11, 16, 0.96),
-            rgba(5, 11, 16, 0.88)
-          );
-          border-radius: 12px;
-          padding: 0.5rem 0;
-          box-shadow:
-            0 18px 45px rgba(0, 0, 0, 0.8),
-            inset 0 0 0 1px rgba(0, 229, 255, 0.2);
-          opacity: 0;
-          visibility: hidden;
-          transform: translateY(-8px);
-          transition: all 0.25s ease;
-          z-index: 2000;
-        }
-
-        .breadcrumb-dropdown:hover .breadcrumb-menu {
-          opacity: 1;
-          visibility: visible;
-          transform: translateY(0);
-        }
-
-        .breadcrumb-menu li a {
-          display: block;
-          padding: 0.5rem 1.1rem;
-          color: #bfefff;
-          font-size: 0.88rem;
-        }
-
-        .breadcrumb-menu li a:hover {
-          background: rgba(0, 229, 255, 0.15);
-        }
-
-        .event-title {
-          padding: 2rem 2rem 2rem;
-          background: radial-gradient(
-            circle at left,
-            rgba(0, 229, 255, 0.12),
-            transparent 55%
-          );
-          border-bottom: 1px solid rgba(0, 229, 255, 0.12);
-        }
-
-        .event-title h1 {
-          max-width: 1200px;
-          margin: 0 auto;
-          font-size: 2.2rem;
-          font-weight: 700;
-          color: #eafaff;
-        }
-
-        .portfolio-details {
-          padding: 4rem 2rem;
-        }
-
-        .portfolio-details-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 3rem;
-        }
-
-        .portfolio-details-carousel img {
-          width: 100%;
-          border-radius: 16px;
-          box-shadow:
-            0 15px 40px rgba(0, 0, 0, 0.7),
-            0 0 0 1px rgba(0, 229, 255, 0.25);
-        }
-
-        .portfolio-info {
-          padding: 2rem;
-          border-radius: 16px;
-          max-height: 200px;
-          background: linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(255, 255, 255, 0.01)
-          );
-          box-shadow:
-            0 10px 30px rgba(0, 0, 0, 0.6),
-            inset 0 0 0 1px rgba(0, 229, 255, 0.2);
-        }
-
-        .portfolio-description {
-          grid-column: 1 / -1;
-          margin-top: 1rem;
-          // padding-top: 3rem;
-          // border-top: 1px solid rgba(0, 229, 255, 0.12);
-        }
-        /* Subtitle */
-        .portfolio-description h2 {
-          font-size: 1.7rem;
-          font-weight: 600;
-          color: #bfefff;
-          margin-bottom: 1.4rem;
-          position: relative;
-          letter-spacing: 0.4px;
-        }
-
-        /* underline like TEAM divider */
-        .portfolio-description h2::after {
-          content: "";
-          display: block;
-          width: 64px;
-          height: 3px;
-          margin-top: 0.6rem;
-          background: linear-gradient(90deg, #00e5ff, #1da1f2);
-          border-radius: 999px;
-          box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
-        }
-
-        /* Description text */
-        .portfolio-description p {
-          font-size: 1.02rem;
-          line-height: 1.75;
-          color: #cfefff;
-          max-width: 900px;
-          margin-bottom: 1.2rem;
-          opacity: 0.95;
-        }
-
-        /* Slight emphasis for first paragraph */
-        .portfolio-description p:first-of-type {
-          font-size: 1.05rem;
-          color: #eafaff;
-        }
-
-        @media (max-width: 900px) {
-          .portfolio-details-container {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
-
       {/* ================== HEADER ================== */}
-      <header className="event-header">
-        <div className="event-header-inner">
-          <div className="event-logo">
-            <Link to="/">
-              <img src={logo} alt="ProDex Logo" />
-            </Link>
-          </div>
+      <header className="sticky top-0 z-[3000] backdrop-blur-xl bg-gradient-to-b from-[#050b10]/95 to-[#050b10]/85 border-b border-cyan-400/15">
+        <div className="max-w-[1200px] mx-auto px-8 py-3 flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/">
+            <img
+              src={logo}
+              alt="ProDex Logo"
+              className="h-9 drop-shadow-[0_0_10px_rgba(0,229,255,0.6)]"
+            />
+          </Link>
 
-          <nav className="event-breadcrumbs">
-            <Link to="/">Home</Link>
-            <span>›</span>
-
-            {/* Go back to same year */}
-            <Link
-              to={`/${fromYear !== "All" ? `?year=${fromYear}` : ""}#portfolio`}
-            >
-              Portfolio
+          {/* Navigation */}
+          <nav className="flex items-center gap-2 text-sm text-cyan-200/70">
+            <Link to="/" className="text-cyan-400 hover:text-cyan-200">
+              Home
             </Link>
 
             <span>›</span>
-            <span className="breadcrumb-current">{event.year}</span>
+
+            {/* ================== PORTFOLIO DROPDOWN ================== */}
+            <div className="relative group">
+              <span className="cursor-pointer text-cyan-400 hover:text-cyan-200">
+                Portfolio
+              </span>
+
+              {/* Dropdown */}
+              <div
+                className="
+                  absolute right-0 top-full mt-2
+                  min-w-[280px]
+                  rounded-xl
+                  bg-gradient-to-br from-[#050b10]/95 to-[#050b10]/90
+                  backdrop-blur-xl
+                  shadow-[0_18px_45px_rgba(0,0,0,0.8)]
+                  ring-1 ring-cyan-400/20
+                  opacity-0 invisible
+                  group-hover:opacity-100 group-hover:visible
+                  transition-all duration-200
+                  z-[5000]
+                "
+              >
+                <ul className="py-2 max-h-[360px] overflow-y-auto">
+                  {Object.entries(eventsByYear).map(([year, events]) => (
+                    <li key={year}>
+                      <div className="px-4 py-1 text-xs uppercase tracking-wide text-cyan-300/60">
+                        {year}
+                      </div>
+
+                      {events.map((e) => (
+                        <Link
+                          key={e.slug}
+                          to={`/event/${e.slug}?fromYear=${year}`}
+                          className="
+                            block px-4 py-2
+                            text-sm text-cyan-100
+                            hover:bg-cyan-400/10
+                            hover:text-cyan-50
+                            transition
+                          "
+                        >
+                          {e.title}
+                        </Link>
+                      ))}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <span>›</span>
+            <span className="text-cyan-100">{event.year}</span>
           </nav>
         </div>
       </header>
 
       {/* ================== TITLE ================== */}
-      <section className="event-title">
-        <h1>Portfolio Details: {event.title}</h1>
+      <section className="px-8 py-8 border-b border-cyan-400/15 bg-[radial-gradient(circle_at_left,rgba(0,229,255,0.12),transparent_55%)]">
+        <h1 className="max-w-[1200px] mx-auto text-[2.2rem] font-bold text-cyan-50">
+          Portfolio Details: {event.title}
+        </h1>
       </section>
 
       {/* ================== CONTENT ================== */}
-      <main id="main">
-        <section className="portfolio-details">
-          <div className="portfolio-details-container">
-            <div className="portfolio-details-carousel">
+      <main className="min-h-screen text-cyan-50 bg-[radial-gradient(circle_at_top,rgba(0,180,255,0.08),#050b10_60%)]">
+        <section className="px-8 py-16">
+          <div className="max-w-[1200px] mx-auto grid grid-cols-[1.2fr_0.8fr] gap-12 max-[900px]:grid-cols-1">
+            {/* Media */}
+            <div>
               {event.video ? (
                 <iframe
-                  className="video-responsive"
+                  className="w-full aspect-video rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.7)] ring-1 ring-cyan-400/25"
                   src={event.video}
                   title={event.title}
-                  frameBorder="0"
                   allowFullScreen
                 />
               ) : (
-                <img src={event.image || fallbackImage} alt={event.title} />
+                <img
+                  src={event.image || fallbackImage}
+                  alt={event.title}
+                  className="w-full rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.7)] ring-1 ring-cyan-400/25"
+                />
               )}
             </div>
 
-            <div className="portfolio-info">
-              <h3>Event Information</h3>
-              <ul>
+            {/* Info Card */}
+            <div className="p-8 max-h-[200px] rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] shadow-[0_10px_30px_rgba(0,0,0,0.6)] ring-1 ring-cyan-400/20">
+              <h3 className="mb-4 text-lg font-semibold text-cyan-100">
+                Event Information
+              </h3>
+              <ul className="space-y-2 text-sm text-cyan-100/90">
                 <li>
                   <strong>Event Name:</strong> {event.title}
                 </li>
@@ -308,7 +150,12 @@ export default function EventPage() {
                 {event.url && (
                   <li>
                     <strong>URL:</strong>{" "}
-                    <a href={event.url} target="_blank" rel="noreferrer">
+                    <a
+                      href={event.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-cyan-400 hover:text-cyan-200"
+                    >
                       Click to Visit
                     </a>
                   </li>
@@ -316,13 +163,26 @@ export default function EventPage() {
               </ul>
             </div>
 
-            <div className="portfolio-description">
-              <h2>{event.subtitle}</h2>
+            {/* ================== DESCRIPTION ================== */}
+            <div className="col-span-full mt-4">
+              <h2 className="text-[1.7rem] font-semibold text-cyan-100 tracking-wide mb-6 relative after:content-[''] after:block after:w-16 after:h-[3px] after:mt-2 after:rounded-full after:bg-gradient-to-r after:from-cyan-400 after:to-blue-500 after:shadow-[0_0_12px_rgba(0,229,255,0.6)]">
+                {event.subtitle}
+              </h2>
+
               {event.description
                 .trim()
                 .split("\n\n")
                 .map((p, i) => (
-                  <p key={i}>{p}</p>
+                  <p
+                    key={i}
+                    className={`max-w-[900px] mb-5 leading-[1.75] ${
+                      i === 0
+                        ? "text-[1.05rem] text-cyan-50"
+                        : "text-[1.02rem] text-cyan-100/90"
+                    }`}
+                  >
+                    {p}
+                  </p>
                 ))}
             </div>
           </div>
