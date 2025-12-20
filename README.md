@@ -1,16 +1,39 @@
-# React + Vite
+# ProDex Website: ReactJS with TailwindCSS
+This is the new ProDex website(work in progress). The website is being ported to ReactJS with TailwindCSS.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Steps to Contribute:
+### Setting Up the Local Repository
+This requires creating a fork. To do so: 
+1. Create a fork of this repository by clicking on the `Fork` button on the repository homepage. <br />
+   a. <br />
+   <img width="106" height="38" alt="image" src="https://github.com/user-attachments/assets/7a65a35c-edb7-4764-87e6-c33a41ac7464" />
+   <br />
+   b. <br />
+   <img width="824" height="500" alt="Screenshot from 2025-12-15 18-50-47" src="https://github.com/user-attachments/assets/dee524fb-ad38-4e38-b898-fa5a7ed1dabd" />
+2. Once the fork is created, clone the repository using:
+```
+git clone https://github.com/<your-username>/<your-fork-name>.git
+```
+3. Enter the folder on your local machine using:
+```
+cd <your-fork-name>
+```
+4. Install required node packages(you should have [NodeJS](https://nodejs.org/en/download) set up on your local machine):
+```
+npm i
+```
+5. Run the server, then most changes will automatically be applied upon saving any file:
+```
+npm run dev
+```
+This will also tell you what is the URL of your local server.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Steps to Push your code to the main repository:
+1. Make the necessary changes, then commit and push using:
+```
+git add <required-files>
+git commit -m "A descriptive commit message, preferably conventional format"
+git push
+```
+2. Once you have verified the changes, open a pull request. The option will be visible on the fork homepage. Make sure to add a PR to the correct branch
+3. The PR will be reviewed and accepted by admins
