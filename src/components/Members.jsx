@@ -2,16 +2,17 @@ import React from "react";
 import MemberCard from "./MemberCard";
 import membersData from "../data/governing-batch-2025-26.json";
 import { MdHorizontalRule } from "react-icons/md";
+
 const Members = () => {
   return (
-    <div className="container bg-[#f3f5fa] mx-auto px-4 py-10">
-      <h2 className="text-4xl font-bold text-center text-[#37517e] mb-0">
+    <div className="container bg-black mx-auto px-4 py-10">
+      <h2 className="text-4xl font-bold text-center text-white mb-0 tracking-wide">
         TEAM
       </h2>
       <div className="grid grid-cols-1 place-items-center w-full mt-0 mb-3">
-        <hr className="w-36 col-start-1 row-start-1 text-[#ddd]" />
+        <hr className="w-36 col-start-1 row-start-1 border-gray-800" />
         <MdHorizontalRule
-          color="#47b2e4"
+          color="#00f0ff"
           size="60px"
           className="col-start-1 row-start-1"
         />
