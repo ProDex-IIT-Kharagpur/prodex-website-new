@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,8 +6,24 @@
   background-color: #000000; 
   position: relative; 
   z-index: 100;
-}
+} */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  background-color: #000000;
+  
+  /* --- CHANGED/ADDED PROPERTIES BELOW --- */
+  position: fixed;        /* Changed from relative to fixed */
+  top: 0;                 /* Sticks to the very top */
+  left: 0;                /* Aligns to the left edge */
+  width: 100%;            /* Spans the full width of the screen */
+  box-sizing: border-box; /* Prevents padding from causing horizontal scrollbars */
+  /* -------------------------------------- */
 
+  z-index: 100;
+}
 .navbar-brand {
   display: flex;
   align-items: center;

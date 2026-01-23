@@ -20,13 +20,12 @@ const Navbar = () => {
       </div>
 
       <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#team">Team</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <a href="/#home">Home</a>
+        <a href="/#about">About</a>
+        <a href="/#team">Team</a>
+        <a href="/#portfolio">Portfolio</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#contact">Contact</a>
       </div>
 
       <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>

@@ -19,11 +19,32 @@ function App() {
           path="/"
           element={
             <>
-              <HeroSection />
-              <Members />
-              <Mentors />
-              <Portfolio />
-              <FAQ />
+              <section id="home">
+                <HeroSection />
+              </section>
+
+              <section id="about">
+                 {/* <About />  <-- when we have the about component */}
+                 <div style={{padding: '50px', textAlign: 'center'}}>About Section Placeholder</div>
+              </section>
+
+              <section id="team">
+                <Members />
+                <Mentors />
+              </section>
+
+              <section id="portfolio">
+                <Portfolio />
+              </section>
+
+              <section id="faq">
+                <FAQ />
+              </section>
+
+              <section id="contact">
+                 {/* <Contact /> <-- when contact page is ready */}
+                 <div style={{padding: '50px', textAlign: 'center'}}>Contact Section Placeholder</div>
+              </section>
             </>
           }
         />
