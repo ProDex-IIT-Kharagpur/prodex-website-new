@@ -8,6 +8,8 @@ import Mentors from "./components/Mentors";
 import FAQ from "./components/FAQ";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection.jsx";
+import About from "./components/About";
+import Contact from "./components/Contact.jsx";
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
               </section>
 
               <section id="about">
-                 {/* <About />  <-- when we have the about component */}
+                 <About />  
                  <div style={{padding: '50px', textAlign: 'center'}}>About Section Placeholder</div>
               </section>
 
@@ -42,7 +44,7 @@ function App() {
               </section>
 
               <section id="contact">
-                 {/* <Contact /> <-- when contact page is ready */}
+                 <Contact /> 
                  <div style={{padding: '50px', textAlign: 'center'}}>Contact Section Placeholder</div>
               </section>
             </>
