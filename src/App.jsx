@@ -8,6 +8,8 @@ import Mentors from "./components/Mentors";
 import FAQ from "./components/FAQ";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection.jsx";
+import About from "./components/About";
+import Contact from "./components/Contact.jsx";
 
 function App() {
   return (
@@ -19,11 +21,32 @@ function App() {
           path="/"
           element={
             <>
-              <HeroSection />
-              <Members />
-              <Mentors />
-              <Portfolio />
-              <FAQ />
+              <section id="home">
+                <HeroSection />
+              </section>
+
+              <section id="about">
+                 <About />  
+                 <div style={{padding: '50px', textAlign: 'center'}}>About Section Placeholder</div>
+              </section>
+
+              <section id="team">
+                <Members />
+                <Mentors />
+              </section>
+
+              <section id="portfolio">
+                <Portfolio />
+              </section>
+
+              <section id="faq">
+                <FAQ />
+              </section>
+
+              <section id="contact">
+                 <Contact /> 
+                 <div style={{padding: '50px', textAlign: 'center'}}>Contact Section Placeholder</div>
+              </section>
             </>
           }
         />

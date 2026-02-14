@@ -4,6 +4,7 @@ body {
     background-color: #000000;
     margin: 0;
     padding: 0;
+    padding-top: 90px;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     -webkit-user-select: none;
@@ -14,6 +15,8 @@ body {
 
 html {
     overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 ::-webkit-scrollbar {
