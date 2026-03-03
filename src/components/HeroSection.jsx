@@ -1,151 +1,220 @@
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Ring, Circle } from '@react-three/drei'; 
-import * as THREE from 'three'; 
-import './HeroSection.css'; 
-import heroVideo from '../assets/Hero_loop.mp4'; 
-import ScrollIndicator from './ScrollIndicator'; 
-
+import React, { useRef, useMemo, useState, useEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Ring, Circle } from '@react-three/drei'
+import * as THREE from 'three'
+import heroVideo from '../assets/Hero_loop.mp4'
+//kharagpur
 const FloatingRing = ({ position, size, speed, offsets }) => {
-  const groupRef = useRef();
+  const groupRef = useRef()
 
   useFrame((state, delta) => {
-    if (!groupRef.current) return;
-    const t = state.clock.getElapsedTime();
-    
-    groupRef.current.position.x = position[0] + Math.sin(t * speed + offsets[0]) * 0.3;
-    groupRef.current.position.y = position[1] + Math.cos(t * speed * 0.8 + offsets[1]) * 0.3;
-    groupRef.current.position.z = position[2] + Math.sin(t * speed * 0.5 + offsets[2]) * 0.1;
-    
-    groupRef.current.rotation.z += delta * 0.1;
-    groupRef.current.rotation.x = Math.sin(t * 0.2) * 0.1; 
-  });
+    if (!groupRef.current) return
+    const t = state.clock.getElapsedTime()
 
-  const outerRadius = size;
-  const innerRadius = size * 0.88; 
+    groupRef.current.position.x = position[0] + Math.sin(t * speed + offsets[0]) * 0.3
+    groupRef.current.position.y = position[1] + Math.cos(t * speed * 0.8 + offsets[1]) * 0.3
+    groupRef.current.position.z = position[2] + Math.sin(t * speed * 0.5 + offsets[2]) * 0.1
+
+    groupRef.current.rotation.z += delta * 0.1
+    groupRef.current.rotation.x = Math.sin(t * 0.2) * 0.1
+  })
 
   return (
     <group ref={groupRef} position={position}>
-      <Ring args={[innerRadius, outerRadius, 64]}>
-        <meshBasicMaterial color="#00E5FF" side={THREE.DoubleSide} transparent={true} opacity={0.2} />
+      <Ring args={[size * 0.88, size, 64]}>
+        <meshBasicMaterial color="#00f0ff" side={THREE.DoubleSide} transparent opacity={0.2} />
       </Ring>
-      <Circle args={[outerRadius, 64]} position={[0, 0, -0.01]}>
-        <meshBasicMaterial color="#000000" transparent={true} opacity={0.35} />
+      <Circle args={[size, 64]} position={[0, 0, -0.01]}>
+        <meshBasicMaterial color="#000000" transparent opacity={0.35} />
       </Circle>
     </group>
-  );
-};
+  )
+}
 
 const FloatingSolidCircle = ({ position, size, speed, offsets }) => {
-  const meshRef = useRef();
+  const meshRef = useRef()
 
   useFrame((state) => {
-    if (!meshRef.current) return;
-    const t = state.clock.getElapsedTime();
+    if (!meshRef.current) return
+    const t = state.clock.getElapsedTime()
 
-    meshRef.current.position.x = position[0] + Math.sin(t * speed * 1.1 + offsets[0]) * 0.5;
-    meshRef.current.position.y = position[1] + Math.cos(t * speed * 0.9 + offsets[1]) * 0.4;
-    meshRef.current.position.z = position[2] + Math.sin(t * speed * 0.7 + offsets[2]) * 0.2;
-  });
+    meshRef.current.position.x = position[0] + Math.sin(t * speed * 1.1 + offsets[0]) * 0.5
+    meshRef.current.position.y = position[1] + Math.cos(t * speed * 0.9 + offsets[1]) * 0.4
+    meshRef.current.position.z = position[2] + Math.sin(t * speed * 0.7 + offsets[2]) * 0.2
+  })
 
   return (
     <mesh ref={meshRef} position={position}>
       <circleGeometry args={[size, 32]} />
-      <meshBasicMaterial 
-        color="#00E5FF" 
-        transparent={true} 
-        opacity={0.8} 
-        side={THREE.DoubleSide}
-      />
+      <meshBasicMaterial color="#00f0ff" transparent opacity={0.8} side={THREE.DoubleSide} />
     </mesh>
-  );
-};
+  )
+}
 
 const RingScene = () => {
-  const ringShapes = useMemo(() => {
-    return [
-      { position: [7, 0, 0], size: 0.85, speed: 0.5, offsets: [0, 1, 2] },    
-      { position: [-6, 3, -1], size: 0.5, speed: 0.7, offsets: [2, 3, 1] },  
-      { position: [8, -4, -2], size: 0.4, speed: 0.9, offsets: [4, 0, 3] },  
-      { position: [-4, -3, 0], size: 0.6, speed: 0.6, offsets: [1, 5, 0] },  
-      { position: [2, 5, -4], size: 0.35, speed: 1.1, offsets: [3, 2, 5] },  
-    ];
-  }, []);
-
-  const solidShapes = useMemo(() => {
-    return [
-      { position: [-9, 4, -2], size: 0.2, speed: 0.8, offsets: [5, 0, 1] },
-      { position: [-12, -2, -1], size: 0.25, speed: 1.2, offsets: [1, 4, 2] },
-      { position: [-8, -5, 0], size: 0.3, speed: 0.6, offsets: [0, 1, 4] },
-      { position: [10, 3, -3], size: 0.2, speed: 1.0, offsets: [3, 2, 3] }, 
-      { position: [11, -4, 2], size: 0.3, speed: 0.9, offsets: [2, 3, 0] },
-      { position: [8, 6, -1], size: 0.42, speed: 1.1, offsets: [4, 5, 1] },
-      { position: [14, 0, -4], size: 0.15, speed: 0.7, offsets: [1, 0, 5] },
-      { position: [-5, 6, -2], size: 0.15, speed: 0.5, offsets: [2, 1, 0] },
-      { position: [0, -6, -3], size: 0.12, speed: 0.4, offsets: [4, 2, 1] },
-      { position: [-3, 1, 0], size: 0.08, speed: 1.5, offsets: [0, 5, 2] },
-      { position: [6, 4, -1], size: 0.18, speed: 0.8, offsets: [3, 4, 0] },
-      { position: [-10, -7, 1], size: 0.35, speed: 0.6, offsets: [1, 1, 1] },
-    ];
-  }, []);
+  const ringShapes = useMemo(() => [
+    { position: [7, 0, 0], size: 0.85, speed: 0.5, offsets: [0, 1, 2] },
+    { position: [-6, 3, -1], size: 0.5, speed: 0.7, offsets: [2, 3, 1] },
+    { position: [8, -4, -2], size: 0.4, speed: 0.9, offsets: [4, 0, 3] },
+    { position: [-4, -3, 0], size: 0.6, speed: 0.6, offsets: [1, 5, 0] },
+    { position: [2, 5, -4], size: 0.35, speed: 1.1, offsets: [3, 2, 5] },
+  ], [])
 
   return (
     <group>
-      {ringShapes.map((data, index) => (
-        <FloatingRing key={'ring-' + index} {...data} />
-      ))}
-      {solidShapes.map((data, index) => (
-        <FloatingSolidCircle key={'solid-' + index} {...data} />
-      ))}
+      {ringShapes.map((d, i) => <FloatingRing key={i} {...d} />)}
     </group>
-  );
-};
+  )
+}
 
 const HeroSection = () => {
+  const [showVideo, setShowVideo] = useState(false)
   return (
-    <section className="hero-container">
-      <div className="hero-canvas-full">
+    <section className="relative bg-black max-w-7xl mx-auto px-4 py-16 
+                        flex flex-col lg:flex-row items-center justify-between gap-12 overflow-hidden">
+
+      {/* Background Canvas */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
           <RingScene />
         </Canvas>
       </div>
 
-      <div className="hero-content-left">
-         <div className="text-breathing-glow"></div>
-         <a href="https://www.google.com/maps/search/?api=1&query=IIT+Kharagpur" target="_blank" rel="noopener noreferrer" className="context-badge">
-           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="location-icon">
-             <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
-           </svg>
-           IIT Kharagpur
-         </a>
-         <h1>Welcome to <br /><span className="highlight">ProDex</span></h1>
-         <p className="hero-subtext">A technical society focused on promoting <span className="highlight-bold">Hardware modelling</span>, <span className="highlight-bold">Design</span> and <span className="highlight-bold">Innovation</span> among the students of IIT Kharagpur.</p>
-         <div className="hero-ctas">
-           <button className="primary-cta-btn">Get Started →</button>
-           <button className="secondary-cta-btn">▷ Watch Video</button>
-         </div>
-         <div className="stats-bar">
-           <div className="stat-item"><span className="stat-value">2012</span><span className="stat-label">Founded</span></div>
-           <div className="stat-item"><span className="stat-value">50+</span><span className="stat-label">Projects</span></div>
-           <div className="stat-item"><span className="stat-value">100+</span><span className="stat-label">Members</span></div>
-         </div>
-      </div>
+      {/* Left Content */}
+      <div className="relative z-10 flex-1 max-w-2xl flex flex-col justify-center 
+                      text-center lg:text-left items-center lg:items-start">
 
-      <div className="hero-visual-right-wrapper">
-        <div className="visual-glow-large"></div>
-        <div className="visual-glow-main"></div>
-        <div className="hero-visual-right">
-          <video className="hero-video" autoPlay loop muted playsInline>
-            <source src={heroVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="video-fade-overlay"></div>
+        {/* Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                        w-[450px] h-[450px]
+                        bg-[radial-gradient(circle,rgba(0,240,255,0.4)_0%,rgba(0,0,0,0)_70%)]
+                        blur-[90px] -z-10 pointer-events-none" />
+
+        {/* Badge */}
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=IIT+Kharagpur"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-6 py-2 border border-[#00f0ff]/30 
+                     rounded-full text-[#00f0ff] text-lg mb-6 bg-[#00f0ff]/5 w-fit"
+        >
+          IIT Kharagpur
+        </a>
+
+        {/* Heading */}
+        <h1 className="text-5xl lg:text-6xl font-bold tracking-wide 
+                       text-white leading-tight mb-6">
+          Welcome to <br />
+          <span className="bg-gradient-to-r from-[#00f0ff] to-cyan-300 
+                           bg-clip-text text-transparent 
+                           drop-shadow-[0_0_12px_rgba(0,240,255,0.4)]">
+            ProDex
+          </span>
+        </h1>
+
+        {/* Subtext */}
+        <p className="text-lg text-gray-300 leading-relaxed mb-10 max-w-[90%]">
+          A technical society focused on promoting{" "}
+          <span className="font-bold text-[#00f0ff]">Hardware modelling</span>,{" "}
+          <span className="font-bold text-[#00f0ff]">Design</span> and{" "}
+          <span className="font-bold text-[#00f0ff]">Innovation</span> among the students of IIT Kharagpur.
+        </p>
+
+        {/* Buttons */}
+        <div className="flex gap-5 flex-wrap justify-center lg:justify-start">
+          <button className="px-6 py-2 font-semibold rounded-full bg-[#00f0ff] text-black
+                             shadow-[0_0_15px_rgba(0,240,255,0.4)]
+                             hover:scale-105 hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]
+                             transition duration-200">
+            Get Started →
+          </button>
+          <button
+            onClick={() => setShowVideo(true)}
+            className="px-6 py-2 font-semibold rounded-full border-2 border-[#00f0ff]
+                      text-white hover:bg-[#00f0ff]/10
+                      hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]
+                      transition duration-200"
+          >
+            Watch Video ▶
+          </button>
         </div>
+
+        {/* Stats */}
+        <div className="flex gap-10 mt-10 justify-center lg:justify-start">
+          {[
+            ["2012", "Founded"],
+            ["50+", "Projects"],
+            ["100+", "Members"]
+          ].map(([val, label], i) => (
+            <div key={i}>
+              <span className="block text-3xl font-bold text-[#00f0ff]
+                               drop-shadow-[0_0_10px_rgba(0,240,255,0.4)]">
+                {val}
+              </span>
+              <span className="text-xs text-gray-400 tracking-widest uppercase">
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+        </div>
+
+        {/* Right Video */}
+        <div className="relative z-10 w-full max-w-xl h-[380px] 
+                        flex justify-center items-center mt-10 lg:mt-0">
+
+          <div className="absolute top-1/2 left-1/2 
+                -translate-x-1/2 -translate-y-1/2
+                w-[600px] h-[600px]
+                bg-[#00f0ff]/10 
+                blur-[120px] 
+                rounded-full -z-10" />
+
+          <div className="absolute w-full h-full overflow-visible rounded-2xl
+                          border border-[#00f0ff]/30
+                          shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+
+            <video
+              className="w-full h-full object-cover scale-105 opacity-90"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src={heroVideo} type="video/mp4" />
+            </video>
+
+            <div className="absolute inset-0 bg-gradient-to-t
+                            from-black/50 via-black/20 to-transparent pointer-events-none" />
+          </div>
+        </div>
+        {showVideo && (
+    <div className="fixed inset-0 bg-black/80 
+                    flex items-center justify-center z-50">
+
+      <div className="relative w-[90%] max-w-3xl aspect-video">
+
+        <button
+          onClick={() => setShowVideo(false)}
+          className="absolute -top-10 right-0 text-white text-2xl"
+        >
+          ✕
+        </button>
+
+        <iframe
+          className="w-full h-full rounded-xl"
+          src="https://www.youtube.com/embed/fcIHGUXnSWg?autoplay=1"
+          title="ProDex Video"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        />
       </div>
 
-      <ScrollIndicator />
-    </section>
-  );
-};
+    </div>
+  )}
 
-export default HeroSection;
+    </section>
+  )
+}
+
+export default HeroSection
